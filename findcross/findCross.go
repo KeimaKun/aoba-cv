@@ -1,9 +1,9 @@
-package main
+package findcross
 
 import (
+	"aoba-cv/colorscheme"
 	"fmt"
 	"image"
-	"image/color"
 	"image/png"
 	"log"
 	"os"
@@ -11,15 +11,10 @@ import (
 	"reflect"
 )
 
-var (
-	white color.Color = color.RGBA{255, 255, 255, 255}
-	black color.Color = color.RGBA{0, 0, 0, 255}
-	blue  color.Color = color.RGBA{0, 0, 255, 255}
-	red   color.Color = color.RGBA{255, 0, 0, 255}
-)
+var ()
 
 // ref) http://golang.org/doc/articles/image_draw.html
-func main() {
+func Main() {
 	file, err := os.Open("randCross.png")
 
 	if err != nil {
@@ -41,7 +36,7 @@ func main() {
 
 	//for i := 0; i < 5; i++ {
 	//	for j := 0; j < 5; j++ {
-	//		img.(*image.RGBA).Set(50+i, 60+j, red)
+	//		img.(*image.RGBA).Set(50+i, 60+j, colorscheme.Red)
 	//	}
 	//}
 	//fmt.Println(img.At(50, 60))
@@ -75,12 +70,12 @@ func DrawRSq(m *image.RGBA, x, y, width, height int) (n int, err error) {
 	//}
 
 	for i := 0; i < width; i++ {
-		m.Set(x+i, y, red)
-		m.Set(x+i, y+height, red)
+		m.Set(x+i, y, colorscheme.Red)
+		m.Set(x+i, y+height, colorscheme.Red)
 	}
 	for j := 0; j < height; j++ {
-		m.Set(x, y+j, red)
-		m.Set(x+width, y+j, red)
+		m.Set(x, y+j, colorscheme.Red)
+		m.Set(x+width, y+j, colorscheme.Red)
 	}
 	return 0, err
 }

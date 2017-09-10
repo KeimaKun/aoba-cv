@@ -1,9 +1,9 @@
-package main
+package randcross
 
 import (
+	"aoba-cv/colorscheme"
 	"fmt"
 	"image"
-	"image/color"
 	"image/draw"
 	"image/png"
 	"log"
@@ -13,16 +13,10 @@ import (
 	"time"
 )
 
-var (
-	white color.Color = color.RGBA{255, 255, 255, 255}
-	black color.Color = color.RGBA{0, 0, 0, 255}
-	blue  color.Color = color.RGBA{0, 0, 255, 255}
-	red  color.Color = color.RGBA{255, 0, , 255}
-	green  color.Color = color.RGBA{0, 255, , 255}
-)
+var ()
 
 // ref) http://golang.org/doc/articles/image_draw.html
-func main() {
+func Main() {
 	rand.Seed(time.Now().UTC().UnixNano()) // Set Random Seed
 
 	m := image.NewRGBA(image.Rect(0, 0, 100, 100)) //*NRGBA (image.Image interface)
@@ -30,7 +24,7 @@ func main() {
 	fmt.Printf("m %T\n", m)
 
 	// White Background
-	draw.Draw(m, m.Bounds(), &image.Uniform{white}, image.ZP, draw.Src)
+	draw.Draw(m, m.Bounds(), &image.Uniform{colorscheme.White}, image.ZP, draw.Src)
 
 	DrawCross(m, rand.Intn(m.Bounds().Max.X-12)+12, rand.Intn(m.Bounds().Max.Y-12)+12)
 
@@ -49,12 +43,12 @@ func DrawCross(m *image.RGBA, x, y int) (n int, err error) {
 
 	for i := -12; i < 13; i++ {
 		for j := -2; j < 3; j++ {
-			m.Set(x+i, y+j, black)
+			m.Set(x+i, y+j, colorscheme.Black)
 		}
 	}
 	for i := -12; i < 13; i++ {
 		for j := -2; j < 3; j++ {
-			m.Set(x+j, y+i, black)
+			m.Set(x+j, y+i, colorscheme.Black)
 		}
 	}
 

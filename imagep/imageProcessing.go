@@ -1,6 +1,7 @@
-package main
+package imagep
 
 import (
+	"aoba-cv/colorscheme"
 	"fmt"
 	"image"
 	"image/color"
@@ -13,17 +14,13 @@ import (
 )
 
 var (
-	white color.Color = color.RGBA{255, 255, 255, 255}
-	black color.Color = color.RGBA{0, 0, 0, 255}
-	blue  color.Color = color.RGBA{0, 0, 255, 255}
-	red   color.Color = color.RGBA{255, 0, 0, 255}
-	Gx                = [3][3]int{{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}}
-	Gy                = [3][3]int{{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}}
+	Gx = [3][3]int{{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}}
+	Gy = [3][3]int{{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}}
 	//Gaussian blur constant, need norm by 159
 	H = [5][5]int{{2, 4, 5, 4, 2}, {4, 9, 12, 9, 4}, {5, 12, 15, 12, 5}, {4, 9, 12, 9, 4}, {2, 4, 5, 4, 2}}
 )
 
-func main() {
+func Main() {
 	infile, err := os.Open("test03.png")
 	if err != nil {
 		log.Fatalln(err)
@@ -174,12 +171,12 @@ func DrawRSq(m *image.RGBA, x, y, width, height int) (n int, err error) {
 	//}
 
 	for i := 0; i < width; i++ {
-		m.Set(x+i, y, red)
-		m.Set(x+i, y+height, red)
+		m.Set(x+i, y, colorscheme.Red)
+		m.Set(x+i, y+height, colorscheme.Red)
 	}
 	for j := 0; j < height; j++ {
-		m.Set(x, y+j, red)
-		m.Set(x+width, y+j, red)
+		m.Set(x, y+j, colorscheme.Red)
+		m.Set(x+width, y+j, colorscheme.Red)
 	}
 	return 0, err
 }
